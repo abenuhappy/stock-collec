@@ -1,0 +1,43 @@
+# Python 가상환경
+venv/
+env/
+ENV/
+.venv/
+
+# Python 캐시
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 배포 관련
+*.egg
+*.egg-info/
+dist/
+build/
+
+# 환경 변수
+.env
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그 파일
+*.log
+
+# 데이터 파일 (선택적)
+# data/*.csv
+
+# 시스템 파일
+.browser_opened
+

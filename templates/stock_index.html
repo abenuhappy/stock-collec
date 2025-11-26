@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>금융 데이터 수집 시스템</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stock_style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- 다크 모드 토글 버튼 -->
+    <button class="theme-toggle" id="themeToggle" title="다크 모드 전환">
+        🌙
+    </button>
+    
+    <div class="container">
+        <header class="header">
+            <h1>📈 금융 데이터 수집 시스템</h1>
+            <p class="subtitle">Financial Data Collection System</p>
+        </header>
+
+        <main class="main-content">
+            <!-- 날짜 선택 섹션 -->
+            <section class="section">
+                <h2 class="section-title">📅 기간 선택</h2>
+                <div class="date-grid">
+                    <div class="form-group">
+                        <label for="startDate">시작일</label>
+                        <input type="date" id="startDate" value="2025-05-01" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">종료일</label>
+                        <input type="date" id="endDate" class="form-input">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 지표 선택 섹션 -->
+            <section class="section">
+                <h2 class="section-title">📊 지표 선택</h2>
+                <div class="indicators-grid">
+                    <div class="indicator-group">
+                        <label class="indicator-label">원자재</label>
+                        <div class="indicator-input-wrapper">
+                            <input type="text" id="commoditiesInput" class="indicator-input" placeholder="지표명 입력 (자동완성)">
+                            <div id="commoditiesAutocomplete" class="autocomplete-list"></div>
+                        </div>
+                        <select id="commoditiesSelect" multiple class="multi-select" size="5">
+                            <!-- JavaScript로 동적 로드 -->
+                        </select>
+                        <div id="commoditiesSelected" class="selected-items"></div>
+                        <small class="help-text">입력창에 지표명 입력(자동완성) 또는 Ctrl(또는 Cmd) + 클릭으로 다중 선택</small>
+                    </div>
+                    <div class="indicator-group">
+                        <label class="indicator-label">주식</label>
+                        <div class="indicator-input-wrapper">
+                            <input type="text" id="stocksInput" class="indicator-input" placeholder="지표명 입력 (자동완성)">
+                            <div id="stocksAutocomplete" class="autocomplete-list"></div>
+                        </div>
+                        <select id="stocksSelect" multiple class="multi-select" size="5">
+                            <!-- JavaScript로 동적 로드 -->
+                        </select>
+                        <div id="stocksSelected" class="selected-items"></div>
+                        <small class="help-text">입력창에 지표명 입력(자동완성) 또는 Ctrl(또는 Cmd) + 클릭으로 다중 선택</small>
+                    </div>
+                    <div class="indicator-group">
+                        <label class="indicator-label">환율/금리</label>
+                        <div class="indicator-input-wrapper">
+                            <input type="text" id="exchangeInput" class="indicator-input" placeholder="지표명 입력 (자동완성)">
+                            <div id="exchangeAutocomplete" class="autocomplete-list"></div>
+                        </div>
+                        <select id="exchangeSelect" multiple class="multi-select" size="5">
+                            <!-- JavaScript로 동적 로드 -->
+                        </select>
+                        <div id="exchangeSelected" class="selected-items"></div>
+                        <small class="help-text">입력창에 지표명 입력(자동완성) 또는 Ctrl(또는 Cmd) + 클릭으로 다중 선택</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 항목 선택 섹션 -->
+            <section class="section">
+                <h2 class="section-title">🧾 항목 선택</h2>
+                <div class="feature-checkboxes">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="priceCheck" checked>
+                        <span>가격 (Price)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="volumeCheck">
+                        <span>거래량 (Volume)</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- 버튼 섹션 -->
+            <section class="section">
+                <div class="button-group">
+                    <button id="downloadBtn" class="btn btn-primary">📥 데이터 추출</button>
+                    <button id="fileDownloadBtn" class="btn btn-info" disabled>💾 파일 다운로드</button>
+                    <button id="deleteBtn" class="btn btn-danger">🗑️ 생성 파일 삭제</button>
+                </div>
+            </section>
+
+            <!-- 결과 표시 섹션 -->
+            <section class="section" id="resultSection" style="display: none;">
+                <h2 class="section-title">📊 결과</h2>
+                <div id="resultContent" class="result-content"></div>
+                
+                <!-- 그래프 섹션 -->
+                <div id="chartSection" style="display: none; margin-top: 30px;">
+                    <h3 class="section-title">📈 날짜별 그래프</h3>
+                    <div style="position: relative; height: 500px; margin-top: 20px;">
+                        <canvas id="dataChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 로딩 표시 -->
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>데이터를 수집하는 중...</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/stock_app.js') }}"></script>
+</body>
+</html>
+
