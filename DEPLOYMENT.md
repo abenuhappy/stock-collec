@@ -32,28 +32,17 @@
 
 ## 🚂 Railway로 배포하기 (추천)
 
-### 1단계: Railway 계정 생성
-1. https://railway.app 접속
-2. GitHub로 로그인 (또는 이메일로 가입)
+**📖 상세 가이드**: `RAILWAY_DEPLOYMENT.md` 파일을 참고하세요.
 
-### 2단계: 새 프로젝트 생성
-1. "New Project" 클릭
-2. "Deploy from GitHub repo" 선택 (GitHub에 코드가 있는 경우)
-   - 또는 "Empty Project" 선택 후 GitHub 연결
-3. 저장소 선택
+### 빠른 요약
 
-### 3단계: 자동 배포
-- Railway가 자동으로 감지하여 배포를 시작합니다
-- `Procfile`과 `requirements.txt`를 자동으로 인식합니다
+1. **Railway 계정 생성**: https://railway.app 접속 후 GitHub로 로그인
+2. **새 프로젝트 생성**: "New Project" > "Deploy from GitHub repo"
+3. **저장소 선택**: `stock-data-collector` 저장소 선택
+4. **자동 배포**: Railway가 자동으로 배포 시작
+5. **도메인 생성**: Settings > Networking > "Generate Domain"
 
-### 4단계: 환경 변수 설정 (선택사항)
-- Settings > Variables에서 환경 변수 추가:
-  - `FLASK_ENV=production` (프로덕션 모드)
-  - `PORT`는 자동으로 설정됨
-
-### 5단계: 도메인 확인
-- 배포 완료 후 "Settings" > "Generate Domain" 클릭
-- 생성된 URL로 접속 가능
+자세한 단계별 설명, 문제 해결, 고급 설정은 `RAILWAY_DEPLOYMENT.md`를 참고하세요.
 
 ## 🎨 Render로 배포하기
 

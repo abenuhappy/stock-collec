@@ -64,10 +64,11 @@ stock/
 
 이 애플리케이션을 온라인에 배포하려면:
 1. **GitHub 저장소 생성**: `GITHUB_SETUP.md` 파일 참고
-2. **배포 플랫폼 선택**: `DEPLOYMENT.md` 파일 참고
+2. **Railway 배포 (추천)**: `RAILWAY_DEPLOYMENT.md` 파일 참고 (상세 가이드)
+3. **기타 플랫폼**: `DEPLOYMENT.md` 파일 참고
 
 주요 배포 플랫폼:
-- **Railway** (추천): https://railway.app
+- **Railway** (추천): https://railway.app - `RAILWAY_DEPLOYMENT.md` 참고
 - **Render**: https://render.com
 - **Fly.io**: https://fly.io
 
