@@ -90,7 +90,7 @@ const app = {
                 if (!data.data || data.data.length === 0) throw new Error('데이터가 없습니다.');
 
                 this.lastData = data.data; // Save for CSV export
-                this.lastTicker = ticker;
+                this.lastTicker = finalTicker;
 
                 this.renderResults(data.data);
                 this.setStatus('success', `성공! ${data.data.length}개의 데이터를 가져왔습니다.`);
