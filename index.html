@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Data Collector (Serverless)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Chart.js for visualization if needed -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>📈 Stock Data Collector</h1>
+            <p class="subtitle">구글 파이낸스 기반 주식 데이터 수집기</p>
+        </header>
+
+        <!-- Configuration Section -->
+        <div id="config-panel" class="config-section">
+            <div class="config-title">⚠️ 설정 필요</div>
+            <p style="font-size: 0.9rem; color: #b45309; margin-bottom: 1rem;">
+                데이터를 가져오려면 Google Apps Script(GAS)를 배포하고 URL을 입력해야 합니다.
+            </p>
+            <div class="form-group">
+                <input type="text" id="gas-url" placeholder="https://script.google.com/macros/s/.../exec">
+                <button class="btn" style="margin-top: 0.5rem;" onclick="app.saveConfig()">URL 저장 및 연결 테스트</button>
+            </div>
+        </div>
+
+        <!-- Main Form -->
+        <div class="card">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>종목 (Ticker)</label>
+                    <select id="ticker-select">
+                        <option value="Select" disabled selected>종목을 선택하세요</option>
+                        <optgroup label="한국 주식">
+                            <option value="KRX:005930">삼성전자 (005930)</option>
+                            <option value="KRX:000660">SK하이닉스 (000660)</option>
+                            <option value="KRX:035420">NAVER (035420)</option>
+                            <option value="KRX:035720">카카오 (035720)</option>
+                            <option value="KRX:005380">현대차 (005380)</option>
+                        </optgroup>
+                        <optgroup label="미국 주식">
+                            <option value="NASDAQ:AAPL">Apple (AAPL)</option>
+                            <option value="NASDAQ:NVDA">NVIDIA (NVDA)</option>
+                            <option value="NASDAQ:GOOGL">Alphabet (GOOGL)</option>
+                            <option value="NASDAQ:TSLA">Tesla (TSLA)</option>
+                            <option value="NYSE:TSM">TSMC (TSM)</option>
+                        </optgroup>
+                        <optgroup label="지수/환율">
+                            <option value=".INX">S&P 500</option>
+                            <option value="CURRENCY:USDKRW">USD/KRW 환율</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>시작일</label>
+                    <input type="date" id="start-date">
+                </div>
+
+                <div class="form-group">
+                    <label>종료일</label>
+                    <input type="date" id="end-date">
+                </div>
+
+                <div class="full-width">
+                    <button id="fetch-btn" class="btn" onclick="app.fetchData()">데이터 가져오기</button>
+                </div>
+            </div>
+
+            <div id="status-box" class="status-box"></div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="result-section" class="card" style="display: none;">
+            <div class="result-actions">
+                <button class="btn-small" onclick="app.downloadCSV()">CSV 다운로드</button>
+            </div>
+
+            <div style="height: 300px; margin-bottom: 2rem;">
+                <canvas id="stockChart"></canvas>
+            </div>
+
+            <div style="max-height: 300px; overflow-y: auto;">
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>날짜</th>
+                            <th>가격 (Close)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
