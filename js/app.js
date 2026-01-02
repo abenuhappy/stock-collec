@@ -59,17 +59,27 @@ const app = {
             return alert('먼저 GAS Web App URL을 설정해주세요.');
         }
 
-        const ticker = document.getElementById('ticker-select').value;
+        const tickerCode = document.getElementById('ticker-input').value.trim().toUpperCase();
+        const market = document.getElementById('market-select').value;
         const startDate = document.getElementById('start-date').value;
         const endDate = document.getElementById('end-date').value;
 
-        if (ticker === 'Select') return alert('종목을 선택해주세요.');
+        if (!tickerCode) return alert('종목 코드를 입력해주세요.');
         if (!startDate || !endDate) return alert('날짜를 입력해주세요.');
 
-        this.setStatus('loading', `${ticker} 데이터 가져오는 중...`);
+        // Construct Ticker (e.g., KRX:005930, CURRENCY:XAUUSD)
+        let finalTicker = tickerCode;
+        if (market) {
+            // If user didn't type the prefix, add it.
+            if (!tickerCode.startsWith(market + ':')) {
+                finalTicker = `${market}:${tickerCode}`;
+            }
+        }
+
+        this.setStatus('loading', `${finalTicker} 데이터 가져오는 중...`);
         document.getElementById('fetch-btn').disabled = true;
 
-        const url = `${this.config.gasUrl}?action=fetch_stock&ticker=${encodeURIComponent(ticker)}&start_date=${startDate}&end_date=${endDate}`;
+        const url = `${this.config.gasUrl}?action=fetch_stock&ticker=${encodeURIComponent(finalTicker)}&start_date=${startDate}&end_date=${endDate}`;
 
         fetch(url)
             .then(res => res.json())
